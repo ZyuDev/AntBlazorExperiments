@@ -15,6 +15,9 @@ namespace Company.WebApplication1
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
 
+            // Add ant Design
+            builder.Services.AddAntDesign();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
