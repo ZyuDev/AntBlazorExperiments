@@ -1,5 +1,6 @@
 ﻿@page "/ExperimentalPage"
 @using AntDesign
+@using AntExperiments.Models;
 <h3>ExperimentalPage</h3>
 
 <hr/>
@@ -13,5 +14,33 @@
     <div class="col-sm-1">
         <span>@_counter</span>
     </div>
+</div>
+<div>
+    <h3>Tree</h3>
+</div>
+<div class="row">
+    <Tree DataSource="_data"
+          ShowIcon
+          TItem="MetaObjectTreeNode"
+          @bind-CheckedKeys="checkedKeys"
+          ChildrenExpression="x => x.DataItem.Children"
+          Checkable
+          TitleExpression="x => x.DataItem.Title">
+          <Nodes>
+            <TreeNode TItem="MetaObjectTreeNode">
+                <IconTemplate Context="node">
+                    @if (node.DataItem.IconClass != null)
+                    {
+                        <span>+</span>
+                        @*<span class=@(node.DataItem.IconClass)></span>*@
+                        @*<Icon Type="frown" Theme="outline" />*@
+                    }
+                </IconTemplate>
+            </TreeNode>
+          </Nodes>
+    </Tree>
+</div>
+<div class="row" style="width: 100px;">
+    <button @onclick="ClickBtn">Click</button>
 </div>
 
