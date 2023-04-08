@@ -1,0 +1,79 @@
+﻿@page "/RightsPage"
+@using Company.WebApplication1.Models
+@using Microsoft.AspNetCore.Connections
+@using System.ComponentModel.Design.Serialization
+<h3>RightsPage</h3>
+<hr/>
+
+<div class="row">
+    <div class="col-sm-8">
+        <Table @ref="@_antTable"
+               TItem="RightsRow"
+               DataSource="@_model.Rights"
+               EnableVirtualization="true"
+               HidePagination="true"
+               Bordered="true"
+               Size="TableSize.Small"
+               ScrollY="500px">
+
+            <ColumnDefinitions>
+                
+                <PropertyColumn Title="Read" Property="c => c.AllowRead" Width="100">
+                    <Checkbox @bind-Value="@context.AllowRead"></Checkbox>
+                </PropertyColumn>
+                <PropertyColumn Title="Insert" Property="c => c.AllowInsert" Width="100">
+                    <Checkbox @bind-Value="@context.AllowInsert"></Checkbox>
+                </PropertyColumn>
+                <PropertyColumn Title="Update" Property="c => c.AllowUpdate" Width="100">
+                    <Checkbox @bind-Value="@context.AllowUpdate"></Checkbox>
+                </PropertyColumn>
+                <PropertyColumn Title="Delete" Property="c => c.AllowDelete" Width="100">
+                    <Checkbox @bind-Value="@context.AllowDelete"></Checkbox>
+                </PropertyColumn>
+                <PropertyColumn Title="Attached files" Property="c => c.AllowAttachedFiles" Width="200">
+                    <Checkbox @bind-Value="@context.AllowAttachedFiles"></Checkbox>
+                </PropertyColumn>
+                
+                <PropertyColumn Title="Object name" 
+                                Property="p => p.ObjectName" 
+                                Filterable></PropertyColumn>
+                
+            </ColumnDefinitions>
+            
+            <HeaderTemplate>
+                <TableRow>
+                    <SimpleTableHeader>Read</SimpleTableHeader>
+                    <SimpleTableHeader>Insert</SimpleTableHeader>
+                    <SimpleTableHeader>Update</SimpleTableHeader>
+                    <SimpleTableHeader>Delete</SimpleTableHeader>
+                    <SimpleTableHeader>Attached</SimpleTableHeader>
+                   <TableHeader @bind-Field="@context.ObjectName" RowSpan="2" Filterable></TableHeader>
+                </TableRow>
+                <TableRow>
+                    <SimpleTableHeader>
+                        <Template>
+                            <Icon Type="check-square" 
+                                  Theme="twotone"  
+                                  Height="1.5em" 
+                                  Width="1.5em" OnClick="OnCheckReadClicked" />
+                            
+                            <Icon Type="minus-square" 
+                                  Theme="twotone" 
+                                  Height="1.5em" 
+                                  Width="1.5em" 
+                                  OnClick="OnUnCheckReadClick"/>
+                            
+                        </Template>
+                    </SimpleTableHeader>
+                    <SimpleTableHeader></SimpleTableHeader>
+                    <SimpleTableHeader></SimpleTableHeader>
+                    <SimpleTableHeader></SimpleTableHeader>
+                    <SimpleTableHeader></SimpleTableHeader>
+                </TableRow>
+            </HeaderTemplate>
+            
+          
+
+        </Table>
+    </div>
+</div>
