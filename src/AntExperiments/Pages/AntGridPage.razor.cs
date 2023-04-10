@@ -1,4 +1,5 @@
 ﻿using AntDesign;
+using AntDesign.TableModels;
 using Bogus;
 
 namespace AntExperiments.Pages;
@@ -16,23 +17,44 @@ public partial class AntGridPage
     protected override void OnInitialized()
     {
         _testData = GenerateTestData(15);
-
-        Total = _testData.Count;
         PageSize = 5;
-
-        LoadPagedData(1, PageSize);
+    }
+    
+    private async Task OnChangeHandler(QueryModel<Model> state)
+    {
+        IsLoading = true;
+        
+        await Task.Delay(500);
+        var currentPage = state.PageIndex != 0 ? state.PageIndex : 1;
+        if (state.FilterModel.Any())
+        {
+            var filter = (int) state.FilterModel.First().Filters.First().Value;
+            LoadPagedData(currentPage, state.PageSize, filter);
+        }
+        else
+        {
+            LoadPagedData(currentPage, state.PageSize);
+        }
+        
+        
+        IsLoading = false;
     }
 
-    private void LoadPagedData(int page, int pageSize)
+    private void LoadPagedData(int page, int pageSize, int idFilter = 0)
     {
-        Items = _testData?.Skip((page - 1) * pageSize)
+        var dataSourceQuery = _testData!.AsEnumerable();
+
+        if (idFilter != 0)
+            dataSourceQuery = dataSourceQuery.Where(x => x.Id == idFilter);
+
+        var dataSource = dataSourceQuery.ToList();
+        Total = dataSource.Count();
+        Items = dataSource.Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToList();
-        PageIndex = page;
-    }
 
-    private void OnPageChanged(PaginationEventArgs p)
-        => LoadPagedData(p.Page, p.PageSize);
+        // PageIndex = page;
+    }
 
     private List<Model> GenerateTestData(int size)
     {

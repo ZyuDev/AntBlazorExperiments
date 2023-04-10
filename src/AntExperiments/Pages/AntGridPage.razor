@@ -1,4 +1,9 @@
 ﻿@page "/AntGridPage"
+@using AntDesign.TableModels
+
+@code {
+    
+}
 
 <h3>AntGridPage</h3>
 
@@ -9,8 +14,7 @@
        Total="Total"
        PageIndex="PageIndex"
        PageSize="PageSize"
-       OnPageIndexChange="OnPageChanged"
-       ScrollX="300">
+       OnChange="OnChangeHandler">
     <Column ShowSorterTooltip="false" Title="Id" @bind-Field="@context.Id" Width="80" Sortable Filterable/>
     <Column ShowSorterTooltip="false" Title="FirstName" @bind-Field="@context.FirstName" Sortable Filterable/>
     <Column ShowSorterTooltip="false" Title="LastName" @bind-Field="@context.LastName" Sortable Filterable/>
