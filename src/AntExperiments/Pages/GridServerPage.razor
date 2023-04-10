@@ -1,0 +1,48 @@
+﻿@page "/GridServerPage"
+@using AntExperiments.Models
+<h3>GridServerPage</h3>
+
+<Divider></Divider>
+
+<div>
+    <GridRow>
+        <GridCol Span="12">
+
+            <Table TItem="Product"
+                   DataSource="@_products"
+                   Bordered="true"
+                   Size="TableSize.Small"
+                   ScrollY="500px" 
+                   Loading="_isWaiting"
+                   @bind-PageIndex="_pageIndex" 
+                   @bind-PageSize="@_pageSize" 
+                   Total="_total"
+                   OnChange="HandleTableChange" 
+                   RemoteDataSource>
+
+                <ColumnDefinitions>
+                    <PropertyColumn TItem="Product" 
+                                    TProp="string" 
+                                    Title="Title" 
+                                    Property="p => p.Title" 
+                                    Filterable></PropertyColumn>
+                    
+                    <PropertyColumn TItem="Product" 
+                                    TProp="string" 
+                                    Title="Vendor code" 
+                                    Property="p => p.VendorCode" 
+                                    Filterable></PropertyColumn>
+                    
+                    <PropertyColumn TItem="Product" 
+                                    TProp="decimal" 
+                                    Title="Price" 
+                                    Property="p => p.Price" 
+                                    Filterable></PropertyColumn>
+                </ColumnDefinitions>
+
+
+            </Table>
+
+        </GridCol>
+    </GridRow>
+</div>
