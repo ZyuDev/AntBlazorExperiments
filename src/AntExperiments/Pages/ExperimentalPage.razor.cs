@@ -1,5 +1,6 @@
 ﻿using AntExperiments.Models;
 using Microsoft.AspNetCore.Components;
+using System.Text.Json;
 
 namespace AntExperiments.Pages;
 
@@ -14,6 +15,13 @@ public partial class ExperimentalPage: ComponentBase
     protected override void OnInitialized()
     {
         _data = GetData();
+        _data.Last().Children.Last().IsChecked = true;
+        
+        var checkedList = new List<string>();
+        checkedList.Add(_data.First().Children.Last().Children.Last().Children.First().Uid.ToString());
+        checkedList.Add(_data.Last().Children.Last().Uid.ToString());
+        
+        checkedKeys = checkedList.ToArray();
     }
 
     private void OnButtonClicked()
@@ -114,5 +122,11 @@ public partial class ExperimentalPage: ComponentBase
     private void ClickBtn()
     {
 
+    }
+
+    private void SetChecked()
+    {
+        checkedKeys = new List<string> { "abaf0a59-a2b0-4872-a89f-caf3b2e89d63" }.ToArray();
+        StateHasChanged();
     }
 }

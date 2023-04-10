@@ -26,22 +26,16 @@
           @bind-CheckedKeys="checkedKeys"
           TitleExpression="x => x.DataItem.Title"
           ChildrenExpression="x => x.DataItem.Children"
+          DefaultCheckedKeys="checkedKeys"
           Checkable
           KeyExpression="x => x.DataItem.Uid.ToString()">
         <TreeNode TItem="MetaObjectTreeNode">
-            @* <IconTemplate Context="node"> *@
-            @*     <Icon Type="menu-unfold" Theme="outline"/> *@
-            @*     $1$ @if (node.DataItem.IconClass != null) #1# *@
-            @*     $1$ { #1# *@
-            @*     $1$ <span>+</span> #1# *@
-            @*     $1$<span class=@(node.DataItem.IconClass)></span>#1# *@
-            @*     $1$<Icon Type="frown" Theme="outline" />#1# *@
-            @*     $1$ } #1# *@
-            @* </IconTemplate> *@
         </TreeNode>
-
     </Tree>
 </div>
 <div class="row" style="width: 100px;">
     <button @onclick="ClickBtn">Click</button>
+</div>
+<div class="row" style="width: 100px;">
+    <button @onclick="SetChecked">Set checked</button>
 </div>
