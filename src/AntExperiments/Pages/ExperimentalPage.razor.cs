@@ -38,7 +38,7 @@ public partial class ExperimentalPage: ComponentBase
             {
                 Name = "1",
                 Title = "1",
-                IconClass = "smile",
+                IconClass = "glyphicon glyphicon-list-alt mr-1",
                 Children = GetOperationChildren("1")
             },
             new MetaObjectTreeNode
@@ -123,11 +123,5 @@ public partial class ExperimentalPage: ComponentBase
     private void ClickBtn()
     {
 
-    }
-
-    private void SetChecked()
-    {
-        checkedKeys = new List<string> { "abaf0a59-a2b0-4872-a89f-caf3b2e89d63" }.ToArray();
-        StateHasChanged();
     }
 }
