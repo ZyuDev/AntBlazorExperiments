@@ -1,4 +1,5 @@
-﻿using AntExperiments.Models;
+﻿using AntDesign;
+using AntExperiments.Models;
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 
@@ -37,7 +38,7 @@ public partial class ExperimentalPage: ComponentBase
             {
                 Name = "1",
                 Title = "1",
-                IconClass = "glyphicon glyphicon-list-alt mr-1",
+                IconClass = "smile",
                 Children = GetOperationChildren("1")
             },
             new MetaObjectTreeNode

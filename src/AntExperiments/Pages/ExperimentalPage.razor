@@ -20,8 +20,16 @@
 </div>
 
 <div class="row">
+    <Icon Type="smile"/>
+</div>
+
+<div class="row">
+    <i class="glyphicon glyphicon-book"></i>
+</div>
+
+<div class="row">
     <Tree DataSource="_data"
-          ShowIcon="true"
+          ShowIcon
           TItem="MetaObjectTreeNode"
           @bind-CheckedKeys="checkedKeys"
           TitleExpression="x => x.DataItem.Title"
@@ -29,13 +37,50 @@
           DefaultCheckedKeys="checkedKeys"
           Checkable
           KeyExpression="x => x.DataItem.Uid.ToString()">
-        <TreeNode TItem="MetaObjectTreeNode">
-        </TreeNode>
+          <TitleIconTemplate>
+              @if (context.DataItem.IconClass != null)
+              {
+                <span>+</span>
+            }
+            else
+            {
+                <span>-</span>
+            }
+        </TitleIconTemplate>
     </Tree>
 </div>
+
+<div class="row">
+    <span>---------</span>
+</div>
+
+<div class="row">
+
+    <Tree ShowIcon Checkable TItem="string">
+
+        @foreach (var item in _data)
+        {
+            <TreeNode Title="@item.Title" TItem="string" Icon="smile">
+                @foreach (var child in item.Children)
+                {
+                    <TreeNode Title="@child.Title" TItem="string" Context="node">
+                        <IconTemplate>
+                            <span>+</span>
+                        </IconTemplate>
+                    </TreeNode>
+                }
+            </TreeNode>
+        }
+    </Tree>
+</div>
+
 <div class="row" style="width: 100px;">
     <button @onclick="ClickBtn">Click</button>
 </div>
 <div class="row" style="width: 100px;">
     <button @onclick="SetChecked">Set checked</button>
 </div>
+
+@*@code {
+    RenderFragment switcherIcon =@<span>+</span>;
+}*@
